@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #weather-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Weather Forecast</h1>
+
+    <div id="weather-container">
+        <label for="city-input">Enter City:</label>
+        <input type="text" id="city-input" placeholder="Enter city name">
+        <button onclick="getWeather()">Get Weather</button>
+
+        <h2>Weather Information</h2>
+        <p id="weather-info"></p>
+    </div>
+
+    <script>
+        const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your actual API key
+
+        async function getWeather() {
+            const cityName = document.getElementById("city-input").value;
+
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`);
+                const data = await response.json();
+
+                const temperature = data.main.temp;
+                const weatherInfo = `The current temperature in ${cityName} is ${temperature}°C.`;
+
+                document.getElementById("weather-info").innerText = weatherInfo;
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                document.getElementById("weather-info").innerText = 'Error fetching weather data';
+            }
+        }
+    </script>
+
+</body>
+</html>
