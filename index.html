@@ -12,9 +12,21 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             min-height: 100vh;
+        }
+
+        #navbar {
+            background-color: #007BFF;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            margin-right: 20px;
         }
 
         #weather-container {
@@ -23,6 +35,7 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin: 20px;
         }
 
         h1 {
@@ -71,6 +84,12 @@
 </head>
 <body>
 
+    <div id="navbar">
+        <a href="#">Home</a>
+        <input type="text" id="city-input" placeholder="Enter city name">
+        <button onclick="getWeather()">Search</button>
+    </div>
+
     <div id="weather-container">
         <h1>Weather Forecast</h1>
 
@@ -83,7 +102,7 @@
     </div>
 
     <script>
-        const apiKey = "3dc44c9d85cb59bee955c0936c488a13"; 
+        const apiKey = '3dc44c9d85cb59bee955c0936c488a13'; // Replace with your actual API key
 
         async function getWeather() {
             const cityName = document.getElementById("city-input").value;
